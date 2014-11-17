@@ -1,0 +1,26 @@
+.page-header
+  = link_to new_painting_path, :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Painting
+  %h1 Listing paintings
+
+= render @paintings
+
+-#.table-responsive
+-#  %table.table.table-striped.table-bordered.table-hover
+-#    %thead
+-#      %tr
+-#        %th Name
+-#        %th Image
+-#        %th
+-#        %th
+-#        %th
+-#
+-#    %tbody
+-#      - @paintings.each do |painting|
+-#        %tr
+-#          %td= painting.name
+-#          %td= painting.image
+-#          %td= link_to 'Show', painting
+-#          %td= link_to 'Edit', edit_painting_path(painting)
+-#          %td= link_to 'Destroy', painting, :data => { confirm: 'Are you sure?' }, :method => :delete

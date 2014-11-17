@@ -1,0 +1,10 @@
+= simple_form_for(@painting) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :image, as: :file
+    = f.input :remote_image_url, as: :string
+
+  .form-actions
+    = f.button :submit
