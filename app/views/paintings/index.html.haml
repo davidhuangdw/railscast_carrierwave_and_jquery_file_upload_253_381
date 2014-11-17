@@ -7,7 +7,12 @@
 = simple_form_for Painting.new do |f|
   = f.input :image, as: :file, input_html:{multiple:true, id:'new_paintings', name:'painting[image]'}
 
-= render @paintings
+-#%p
+-#  = form_for Painting.new do |f|
+-#    = f.file_field :image, id:'new_paintings', multiple:true, name:'painting[image]'
+
+#paintings
+  = render @paintings
 
 -#.table-responsive
 -#  %table.table.table-striped.table-bordered.table-hover

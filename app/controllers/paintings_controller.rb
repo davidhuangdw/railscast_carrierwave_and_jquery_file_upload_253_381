@@ -39,9 +39,11 @@ class PaintingsController < ApplicationController
       if @painting.save
         format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
         format.json { render json: @painting, status: :created }
+        format.js
       else
         format.html { render action: 'new' }
         format.json { render json: @painting.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

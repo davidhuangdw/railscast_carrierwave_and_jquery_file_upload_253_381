@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('#new_paintings').fileupload()
+  $('#new_paintings').fileupload
+    dataType: 'script'
 #    done: (e, data)->
 #      console.log "Done", data.result
 #      $("body").append(data.result)

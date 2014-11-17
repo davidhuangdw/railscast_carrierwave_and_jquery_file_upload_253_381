@@ -1,7 +1,8 @@
 .col-sm-3
   %h3= painting.name
   %p
-    = image_tag painting.image_url(:thumb)
+    = link_to painting do
+      = image_tag painting.image_url(:thumb)
   %p
     = link_to 'Show', painting
     = link_to 'Edit', edit_painting_path(painting)
