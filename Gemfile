@@ -69,3 +69,4 @@ end
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'jquery.fileupload-rails'

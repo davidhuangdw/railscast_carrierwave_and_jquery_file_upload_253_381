@@ -4,6 +4,9 @@
     New Painting
   %h1 Listing paintings
 
+= simple_form_for Painting.new do |f|
+  = f.input :image, as: :file, input_html:{multiple:true, id:'new_paintings', name:'painting[image]'}
+
 = render @paintings
 
 -#.table-responsive
