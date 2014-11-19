@@ -1,28 +1,56 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### jquery file upload
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+        # update page after upload
+        $ ->
+          $('#new_paintings').fileupload
+            dataType: 'script'
+        # paintings_controller.rb
+          format.js
+        # views/paintings/create.js.coffee
+        <% if @painting.new_record? %>
+          alert("failed to upload painting: <%= j sanitize @painting.errors.full_messages.join(',') %>")
+        <% else %>
+          $('#paintings').append("<%= j render(@painting) %>")
+        <% end %>
+
+
+        # view: change name to 'painting[image]' for multiple file upload
+        = simple_form_for Painting.new do |f|
+          = f.input :image, as: :file, input_html:{multiple:true, id:'new_paintings', name:'painting[image]'}
+        # js
+        //= require jquery.fileupload
+        $ ->
+          $('#new_paintings').fileupload()
+
+        gem 'carrierwave'
+        gem 'jquery.fileupload-rails'
+
+### carrierwave
+
+        rails g uploader image
+        # app/uploaders/image_uploader.rb
+        class ImageUploader < ..
+          include CarrierWave::MiniMagick
+          version :thumb do
+            process :resize_to_fit => [200, 200]
+          end
+          def extension_white_list
+            %w(jpg jpeg gif png)
+          end
+        end
+        # models/painting.rb
+        class Painting < ..
+          mount_uploader :image, ImageUploader
+        end
+        # views/paintings/_form.haml
+          = f.input :image, as: :file
+          = f.input :remote_image_url, as: :string          # also allow remote_image_url
+        # views/paintings/show.haml
+          = image_tag painting.image_url
+          = image_tag painting.image_url(:thumb)
+
+
+
+        gem 'carrierwave'
+        gem 'mini_magick'
